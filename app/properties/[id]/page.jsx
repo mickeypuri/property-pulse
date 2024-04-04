@@ -20,7 +20,7 @@ const PropertyPage = () => {
     const fetchData = async () => {
 
       if (!id) { return; };
-      console.log("*** Fetching data ***", id);
+      //console.log("*** Fetching data ***", id);
       
       try {
         const _property = await fetchProperty(id);
@@ -35,12 +35,12 @@ const PropertyPage = () => {
     };
 
     fetchData();
-    
+
   }, [id])
 
   if (!loading && !property) {
     return (
-      <h1 classNameName="text-center text-2xl font-bold mt-10">
+      <h1 className="text-center text-2xl font-bold mt-10">
         Property not found
       </h1>
     )
