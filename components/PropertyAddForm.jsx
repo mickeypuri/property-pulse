@@ -31,9 +31,63 @@ const PropertyAddForm = () => {
     images: [],
   });
 
-  const handleChange = () => { }
-  const handleAmenitiesChange = () => { }
-  const handleImageChange = () => { }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    // check if nested property
+    if (name.includes(".")) {
+      const [outerKey, innerKey] = name.split(".");
+      console.log(outerKey, innerKey);
+      setfields((prevFields) => ({
+        ...prevFields, 
+        [outerKey]: {
+          ...prevFields[outerKey],
+          [innerKey]: value
+        }
+      }))
+    }
+    else {
+      setfields((prevFields) => ({
+        ...prevFields, [name]: value
+      }))
+    }
+  }
+  const handleAmenitiesChange = (e) => {
+    const { value, checked } = e.target;
+
+    // Clone the current array
+    const updatedAmenities = [...fields.amenities];
+
+    if (checked) {
+      updatedAmenities.push(value);
+    }
+    else {
+      const index = updatedAmenities.indexOf(value);
+      if (index !== -1) {
+        updatedAmenities.splice(index, 1);
+      }
+    }
+    setfields((prevFields) => ({
+      ...prevFields,
+      amenities: updatedAmenities
+    }))
+  }
+  const handleImageChange = (e) => {
+    const { files } = e.target;
+    
+    // clone images array
+    const updatedImages = [...fields.images];
+
+    // add new files to the array
+    for(const file of files) {
+      updatedImages.push(file);
+    }
+
+    setfields((prevFields) => ({
+      ...prevFields,
+      images: updatedImages
+    }));
+  }
   
   return (
     <form>
