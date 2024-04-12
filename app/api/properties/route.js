@@ -102,4 +102,4 @@ export const POST = async (request) => {
     console.log(error);
     return new Response("Failed to add property", { status: 500 });
   }
-}
+};
