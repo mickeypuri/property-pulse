@@ -20,7 +20,7 @@ export const POST = async (request) => {
     const user = await User.findOne({_id: userId});
 
     // Check if property is already bookmarked
-    let isBookmarked = user.bookmarks.includs(propertyId);
+    let isBookmarked = user.bookmarks.includes(propertyId);
     let message;
 
     if (isBookmarked) {
